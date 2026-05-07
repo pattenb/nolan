@@ -680,9 +680,9 @@ const MembersPage = () => {
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    className="bg-white border border-slate-200 p-6 group hover:border-ugent-blue transition-all"
+                    className="bg-white border border-ugent-blue p-6 group hover:border-slate-200 transition-all"
                   >
-                    <div className="aspect-square mb-6 overflow-hidden bg-slate-100 grayscale hover:grayscale-0 transition-all duration-500">
+                    <div className="aspect-square mb-6 overflow-hidden bg-slate-100 grayscale-0 group-hover:grayscale transition-all duration-500">
                       <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                     <h4 className="text-lg font-bold text-slate-900 group-hover:text-ugent-blue transition-colors mb-1">{member.name}</h4>
