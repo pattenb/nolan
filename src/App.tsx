@@ -23,9 +23,6 @@ import {
 import { useState } from "react";
 import { APIProvider, Map, AdvancedMarker, Pin } from "@vis.gl/react-google-maps";
 
-import profNolanImg from "./assets/images/regenerated_image_1778148321924.jpg";
-import eleonoraRossiImg from "./assets/images/regenerated_image_1778131939252.jpg";
-
 // --- Constants ---
 
 const RESEARCH_AREAS = [
@@ -43,7 +40,7 @@ const TEAM_CATEGORIES = [
   {
     title: "Academic Staff",
     members: [
-      { name: "Prof. Steven P. Nolan", role: "Principal Investigator", image: profNolanImg }
+      { name: "Prof. Steven P. Nolan", role: "Principal Investigator", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop" }
     ]
   },
   {
@@ -326,13 +323,13 @@ const NewsAndAgenda = () => {
       title: "Eleonora joined the team as a PhD student: welcome!",
       date: "04 May 2026",
       category: "Group News",
-      image: eleonoraRossiImg
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=800&auto=format&fit=crop"
     },
     {
       title: "Leandros joins the group as postdoctoral researcher",
       date: "01 May 2026",
       category: "Group News",
-      image: "https://images.unsplash.com/photo-1532187875605-2fe359041cd2?q=80&w=800&auto=format&fit=crop"
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop"
     },
     {
       title: "Junying Wang joins the group as PhD candidate",
@@ -369,6 +366,7 @@ const NewsAndAgenda = () => {
                       src={item.image} 
                       alt={item.title} 
                       className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                      referrerPolicy="no-referrer"
                     />
                   </div>
                   <div className="flex flex-col justify-center">
@@ -616,7 +614,7 @@ const OpportunitiesPage = () => {
                 className="bg-white border border-slate-200 flex flex-col group hover:shadow-xl transition-all h-full"
               >
                 <div className="h-56 overflow-hidden relative">
-                  <img src={opp.image} alt={opp.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <img src={opp.image} alt={opp.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
                   <div className="absolute top-4 right-4 bg-ugent-blue text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1">
                     {opp.badge}
                   </div>
@@ -675,6 +673,23 @@ const ContactPage = () => {
             <span className="text-ugent-blue font-bold text-xs uppercase tracking-widest mb-4 block">Get in touch</span>
             <h2 className="text-5xl font-bold text-slate-900 tracking-tight leading-tight">Contact Us</h2>
             <div className="h-1.5 w-24 bg-[#FFD200] mt-8"></div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-20 h-96 relative overflow-hidden group shadow-lg"
+          >
+            <img 
+              src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1600&auto=format&fit=crop" 
+              alt="Ghent University Campus Sterre Building S3" 
+              className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-slate-900/80 to-transparent">
+              <p className="text-white font-bold text-lg">Ghent University, Campus Sterre — Building S3</p>
+            </div>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -924,7 +939,7 @@ const MembersPage = () => {
                     className="bg-white border border-ugent-blue p-6 group hover:border-slate-200 transition-all"
                   >
                     <div className="aspect-square mb-6 overflow-hidden bg-slate-100 grayscale-0 group-hover:grayscale transition-all duration-500">
-                      <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
                     </div>
                     <h4 className="text-lg font-bold text-slate-900 group-hover:text-ugent-blue transition-colors mb-1">{member.name}</h4>
                     <p className="text-sm text-slate-500 font-medium">{member.role}</p>
@@ -972,6 +987,7 @@ const PublicationsPage = () => {
                   src={pub.image} 
                   alt={pub.title} 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 grayscale-[0.3] group-hover:grayscale-0" 
+                  referrerPolicy="no-referrer"
                 />
               </div>
               <div className="p-8 md:p-12 flex flex-col justify-center">
