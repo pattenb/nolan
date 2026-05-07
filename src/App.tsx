@@ -39,7 +39,7 @@ const TEAM_CATEGORIES = [
   {
     title: "Academic Staff",
     members: [
-      { name: "Prof. Steven P. Nolan", role: "Principal Investigator", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop" }
+      { name: "Prof. Steven P. Nolan", role: "Principal Investigator", image: "/src/assets/images/regenerated_image_1778148321924.jpg" }
     ]
   },
   {
