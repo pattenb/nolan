@@ -21,6 +21,7 @@ import {
   BookOpen
 } from "lucide-react";
 import { useState } from "react";
+import { APIProvider, Map, AdvancedMarker, Pin } from "@vis.gl/react-google-maps";
 
 import profNolanImg from "./assets/images/regenerated_image_1778148321924.jpg";
 import eleonoraRossiImg from "./assets/images/regenerated_image_1778131939252.jpg";
@@ -95,15 +96,15 @@ const PUBLICATIONS = [
 
 // --- Components ---
 
-const Navbar = ({ currentView, setCurrentView, setIsSearchOpen }: { currentView: string, setCurrentView: (v: "home" | "members" | "publications") => void, setIsSearchOpen: (v: boolean) => void }) => {
+const Navbar = ({ currentView, setCurrentView, setIsSearchOpen }: { currentView: string, setCurrentView: (v: "home" | "members" | "publications" | "contact" | "opportunities") => void, setIsSearchOpen: (v: boolean) => void }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
     { name: "Home", id: "home" },
     { name: "Members", id: "members" },
     { name: "Publications", id: "publications" },
-    { name: "Opportunities", id: "#" },
-    { name: "Contact", id: "#" }
+    { name: "Opportunities", id: "opportunities" },
+    { name: "Contact", id: "contact" }
   ];
 
   return (
@@ -187,7 +188,7 @@ const Navbar = ({ currentView, setCurrentView, setIsSearchOpen }: { currentView:
   );
 };
 
-const Hero = ({ setCurrentView }: { setCurrentView: (v: "home" | "members" | "publications") => void }) => {
+const Hero = ({ setCurrentView }: { setCurrentView: (v: "home" | "members" | "publications" | "contact" | "opportunities") => void }) => {
   return (
     <section className="relative h-[480px] bg-[#1E64B4] flex items-center overflow-hidden">
       {/* Geometric Grid Background */}
@@ -498,7 +499,7 @@ const Footer = () => {
 };
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<"home" | "members" | "publications">("home");
+  const [currentView, setCurrentView] = useState<"home" | "members" | "publications" | "contact" | "opportunities">("home");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
@@ -530,8 +531,12 @@ export default function App() {
           </>
         ) : currentView === "members" ? (
           <MembersPage />
-        ) : (
+        ) : currentView === "publications" ? (
           <PublicationsPage />
+        ) : currentView === "opportunities" ? (
+          <OpportunitiesPage />
+        ) : (
+          <ContactPage />
         )}
       </main>
       <Footer />
@@ -553,6 +558,251 @@ export default function App() {
     </div>
   );
 }
+
+const OpportunitiesPage = () => {
+  const opportunities = [
+    {
+      title: "Postdoctoral Applicants",
+      description: "Funded positions will be advertised when available. Researchers who wish to apply for independent funding should contact Steve well in advance of their anticipated start-date with a list of the fellowships for which they are eligible. Outstanding candidates will receive assistance with fellowship applications.",
+      image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=800&auto=format&fit=crop",
+      badge: "Open Inquiries"
+    },
+    {
+      title: "PhD Applicants",
+      description: "No funded positions are currently available but this situation changes regularly. Opportunities exist via the FWO (www.fwo.be) and other external funding bodies. We welcome motivated students with a strong background in synthetic chemistry.",
+      image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800&auto=format&fit=crop",
+      badge: "Regular Intake"
+    },
+    {
+      title: "Masters and Visiting Students",
+      description: "M.Sc. and visiting students are always welcome. Visiting students are encouraged to stay for periods of minimum 4 months or longer. Projects and summer research are available in the broad areas of organic / organometallic synthesis and catalysis. Please contact Steve early to discuss project details.",
+      image: "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=800&auto=format&fit=crop",
+      badge: "Always Open"
+    }
+  ];
+
+  return (
+    <div className="bg-slate-50 min-h-screen">
+      <div className="py-20">
+        <div className="container-wide">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-16"
+          >
+            <span className="text-ugent-blue font-bold text-xs uppercase tracking-widest mb-4 block">Join the Group</span>
+            <h2 className="text-5xl font-bold text-slate-900 tracking-tight leading-tight">Opportunities</h2>
+            <div className="h-1.5 w-24 bg-[#FFD200] mt-8"></div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl mb-20"
+          >
+            <p className="text-2xl text-slate-700 leading-relaxed font-medium">
+              We are always looking for passionate researchers to join our team in Ghent. Explore the different pathways to become part of the Nolan Group.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {opportunities.map((opp, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="bg-white border border-slate-200 flex flex-col group hover:shadow-xl transition-all h-full"
+              >
+                <div className="h-56 overflow-hidden relative">
+                  <img src={opp.image} alt={opp.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute top-4 right-4 bg-ugent-blue text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1">
+                    {opp.badge}
+                  </div>
+                </div>
+                <div className="p-8 flex-grow flex flex-col">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-6 tracking-tight">{opp.title}</h3>
+                  <p className="text-slate-600 leading-relaxed mb-8 flex-grow">
+                    {opp.description}
+                  </p>
+                  <a 
+                    href="mailto:Steven.Nolan@UGent.be" 
+                    className="flex items-center gap-2 text-ugent-blue font-bold text-xs uppercase tracking-widest hover:gap-3 transition-all"
+                  >
+                    Inquire Now <ChevronRight size={14} />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-20 p-10 bg-ugent-blue text-white flex flex-col md:flex-row items-center justify-between gap-8 rounded-sm"
+          >
+            <div className="max-w-xl">
+              <h4 className="text-2xl font-bold mb-2">Ready to start your research journey?</h4>
+              <p className="text-white/80 font-medium">Contact Prof. Steven Nolan for more details on current openings and project availability.</p>
+            </div>
+            <a href="mailto:Steven.Nolan@UGent.be" className="bg-[#FFD200] text-slate-900 font-bold px-10 py-4 rounded-sm hover:brightness-105 transition-all uppercase tracking-widest text-sm whitespace-nowrap shadow-lg">
+              Contact Steve
+            </a>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ContactPage = () => {
+  const API_KEY = process.env.GOOGLE_MAPS_PLATFORM_KEY || "";
+  const hasValidKey = Boolean(API_KEY) && API_KEY !== 'YOUR_API_KEY';
+  
+  const center = { lat: 51.02272, lng: 3.70932 };
+
+  return (
+    <div className="bg-slate-50 min-h-screen">
+      <div className="py-20">
+        <div className="container-wide">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-16"
+          >
+            <span className="text-ugent-blue font-bold text-xs uppercase tracking-widest mb-4 block">Get in touch</span>
+            <h2 className="text-5xl font-bold text-slate-900 tracking-tight leading-tight">Contact Us</h2>
+            <div className="h-1.5 w-24 bg-[#FFD200] mt-8"></div>
+          </motion.div>
+
+          {/* Campus Image Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-20 h-96 relative overflow-hidden group shadow-lg"
+          >
+            <img 
+              src="https://images.unsplash.com/photo-1592280771190-3e2e4d571952?q=80&w=1600&auto=format&fit=crop" 
+              alt="Ghent University Campus" 
+              className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-slate-900/80 to-transparent">
+              <p className="text-white font-bold text-lg">Ghent University, Campus Sterre — Building S3</p>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <div className="bg-white border border-slate-200 p-10 md:p-16 h-full flex flex-col justify-between shadow-sm">
+                <div>
+                  <div className="mb-10">
+                    <span className="text-ugent-blue font-bold text-xs uppercase tracking-widest mb-2 block">Principal Investigator</span>
+                    <h3 className="text-3xl font-bold text-slate-900 tracking-tight leading-tight">Prof. dr. Steven P. Nolan</h3>
+                  </div>
+                  
+                  <div className="space-y-8">
+                    <div className="flex gap-6">
+                      <div className="w-12 h-12 bg-slate-50 flex items-center justify-center text-ugent-blue border border-slate-100 flex-shrink-0">
+                        <MapPin size={22} />
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Location</p>
+                        <p className="text-slate-700 font-medium leading-relaxed">
+                          Department of Chemistry<br />
+                          Krijgslaan 281 - building S3 (Campus Sterre)<br />
+                          9000 Gent, Belgium
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-6">
+                      <div className="w-12 h-12 bg-slate-50 flex items-center justify-center text-ugent-blue border border-slate-100 flex-shrink-0">
+                        <Mail size={22} />
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Email</p>
+                        <a href="mailto:Steven.Nolan@UGent.be" className="text-ugent-blue font-bold hover:underline transition-all">
+                          Steven.Nolan@UGent.be
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-6">
+                      <div className="w-12 h-12 bg-slate-50 flex items-center justify-center text-ugent-blue border border-slate-100 flex-shrink-0">
+                        <Phone size={22} />
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Phone</p>
+                        <p className="text-slate-700 font-bold tracking-tight">+32-9-2644458</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-16 pt-10 border-t border-slate-100">
+                   <p className="text-slate-500 text-sm mb-8 leading-relaxed">
+                     For inquiries regarding PhD vacancies, postdoctoral positions, or research collaborations, please reach out via email.
+                   </p>
+                   <div className="flex flex-col sm:flex-row gap-6 sm:items-center">
+                     <a href="mailto:Steven.Nolan@UGent.be" className="btn-primary inline-flex items-center justify-center">Send Email</a>
+                     <div className="flex gap-4">
+                       {["FB", "TW", "IN"].map(icon => (
+                         <div key={icon} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 text-xs font-bold hover:text-ugent-blue hover:border-ugent-blue transition-all cursor-pointer">
+                           {icon}
+                         </div>
+                       ))}
+                     </div>
+                   </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="h-[500px] lg:h-auto min-h-[600px] border border-slate-200 overflow-hidden bg-slate-100 shadow-sm"
+            >
+              {!hasValidKey ? (
+                 <div className="h-full flex items-center justify-center p-12 bg-slate-50">
+                   <div className="text-center max-w-md">
+                     <h2 className="text-xl font-bold mb-4">Google Map</h2>
+                     <p className="text-sm text-slate-600 mb-6">Interactive map of Krijgslaan 281, Building S3.</p>
+                     <div className="bg-slate-200 aspect-video mb-6 flex items-center justify-center">
+                        <MapPin size={48} className="text-slate-400 opacity-50" />
+                     </div>
+                     <p className="text-xs text-slate-400 italic">API Key missing from environment</p>
+                   </div>
+                 </div>
+              ) : (
+                <APIProvider apiKey={API_KEY} version="weekly">
+                  <Map
+                    defaultCenter={center}
+                    defaultZoom={15}
+                    mapId="NOLAN_GROUP_MAP"
+                    internalUsageAttributionIds={['gmp_mcp_codeassist_v1_aistudio']}
+                    style={{ width: '100%', height: '100%' }}
+                  >
+                    <AdvancedMarker position={center} title="The Nolan Group - building S3">
+                      <Pin background="#1E64B4" glyphColor="#fff" borderColor="#FFD200" />
+                    </AdvancedMarker>
+                  </Map>
+                </APIProvider>
+              )}
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const SearchOverlay = ({ onClose, onSelect }: { onClose: () => void, onSelect: (view: string, anchor?: string) => void }) => {
   const [query, setQuery] = useState("");
@@ -585,6 +835,14 @@ const SearchOverlay = ({ onClose, onSelect }: { onClose: () => void, onSelect: (
         results.push({ type: "Publication", title: pub.title, sub: pub.date, view: "publications" });
       }
     });
+
+    if ("contact".includes(q)) {
+      results.push({ type: "Page", title: "Contact Us", sub: "Get in touch with the Nolan Group", view: "contact" });
+    }
+
+    if ("opportunities".includes(q) || "jobs".includes(q) || "phd".includes(q) || "postdoc".includes(q)) {
+      results.push({ type: "Page", title: "Opportunities", sub: "PhD, Postdoc, and Visiting positions", view: "opportunities" });
+    }
 
     return results;
   })();
