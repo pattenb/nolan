@@ -23,6 +23,11 @@ import {
 import { useState } from "react";
 import { APIProvider, Map, AdvancedMarker, Pin } from "@vis.gl/react-google-maps";
 
+import eleonoraRossiImg from "./assets/images/regenerated_image_1778154393774.png";
+import leandrosNewsImg from "./assets/images/regenerated_image_1778154393082.png";
+import campusBuildingImg from "./assets/images/regenerated_image_1778154539717.jpg";
+import pubTuningImg from "./assets/images/regenerated_image_1778154626094.gif";
+
 // --- Constants ---
 
 const RESEARCH_AREAS = [
@@ -46,14 +51,14 @@ const TEAM_CATEGORIES = [
   {
     title: "Postdoctoral Researchers",
     members: [
-      { name: "Dr. Leandros Pillement", role: "Postdoctoral Researcher", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop" },
+      { name: "Dr. Leandros Pillement", role: "Postdoctoral Researcher", image: leandrosNewsImg },
       { name: "Dr. Maria Schmidt", role: "Postdoctoral Researcher", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop" }
     ]
   },
   {
     title: "PhD Candidates",
     members: [
-      { name: "Eleonora Rossi", role: "PhD Researcher", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400&auto=format&fit=crop" },
+      { name: "Eleonora Rossi", role: "PhD Researcher", image: eleonoraRossiImg },
       { name: "Junying Wang", role: "PhD Researcher", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
       { name: "Jan de Smet", role: "PhD Researcher", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=400&auto=format&fit=crop" }
     ]
@@ -85,7 +90,7 @@ const PUBLICATIONS = [
   {
     title: "Electronic and Steric Tuning of N-Heterocyclic Carbene Ligands",
     intro: "Mapping the buried volume and electronic parameters of a library of NHC ligands to facilitate rational catalyst design.",
-    image: "https://images.unsplash.com/photo-1532187875605-2fe359041cd2?q=80&w=800&auto=format&fit=crop",
+    image: pubTuningImg,
     date: "Chemical Reviews, 2022",
     doi: "10.1021/acs.chemrev.2c00000"
   }
@@ -323,13 +328,13 @@ const NewsAndAgenda = () => {
       title: "Eleonora joined the team as a PhD student: welcome!",
       date: "04 May 2026",
       category: "Group News",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=800&auto=format&fit=crop"
+      image: eleonoraRossiImg
     },
     {
       title: "Leandros joins the group as postdoctoral researcher",
       date: "01 May 2026",
       category: "Group News",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop"
+      image: leandrosNewsImg
     },
     {
       title: "Junying Wang joins the group as PhD candidate",
@@ -366,7 +371,6 @@ const NewsAndAgenda = () => {
                       src={item.image} 
                       alt={item.title} 
                       className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
-                      referrerPolicy="no-referrer"
                     />
                   </div>
                   <div className="flex flex-col justify-center">
@@ -568,7 +572,7 @@ const OpportunitiesPage = () => {
     {
       title: "PhD Applicants",
       description: "No funded positions are currently available but this situation changes regularly. Opportunities exist via the FWO (www.fwo.be) and other external funding bodies. We welcome motivated students with a strong background in synthetic chemistry.",
-      image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800&auto=format&fit=crop",
+      image: campusBuildingImg,
       badge: "Regular Intake"
     },
     {
@@ -614,7 +618,7 @@ const OpportunitiesPage = () => {
                 className="bg-white border border-slate-200 flex flex-col group hover:shadow-xl transition-all h-full"
               >
                 <div className="h-56 overflow-hidden relative">
-                  <img src={opp.image} alt={opp.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
+                  <img src={opp.image} alt={opp.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute top-4 right-4 bg-ugent-blue text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1">
                     {opp.badge}
                   </div>
@@ -682,10 +686,9 @@ const ContactPage = () => {
             className="mb-20 h-96 relative overflow-hidden group shadow-lg"
           >
             <img 
-              src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1600&auto=format&fit=crop" 
+              src={campusBuildingImg} 
               alt="Ghent University Campus Sterre Building S3" 
               className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
-              referrerPolicy="no-referrer"
             />
             <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-slate-900/80 to-transparent">
               <p className="text-white font-bold text-lg">Ghent University, Campus Sterre — Building S3</p>
@@ -939,7 +942,7 @@ const MembersPage = () => {
                     className="bg-white border border-ugent-blue p-6 group hover:border-slate-200 transition-all"
                   >
                     <div className="aspect-square mb-6 overflow-hidden bg-slate-100 grayscale-0 group-hover:grayscale transition-all duration-500">
-                      <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
+                      <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                     <h4 className="text-lg font-bold text-slate-900 group-hover:text-ugent-blue transition-colors mb-1">{member.name}</h4>
                     <p className="text-sm text-slate-500 font-medium">{member.role}</p>
@@ -987,7 +990,6 @@ const PublicationsPage = () => {
                   src={pub.image} 
                   alt={pub.title} 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 grayscale-[0.3] group-hover:grayscale-0" 
-                  referrerPolicy="no-referrer"
                 />
               </div>
               <div className="p-8 md:p-12 flex flex-col justify-center">
