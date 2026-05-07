@@ -677,23 +677,6 @@ const ContactPage = () => {
             <div className="h-1.5 w-24 bg-[#FFD200] mt-8"></div>
           </motion.div>
 
-          {/* Campus Image Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-20 h-96 relative overflow-hidden group shadow-lg"
-          >
-            <img 
-              src="https://images.unsplash.com/photo-1592280771190-3e2e4d571952?q=80&w=1600&auto=format&fit=crop" 
-              alt="Ghent University Campus" 
-              className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-slate-900/80 to-transparent">
-              <p className="text-white font-bold text-lg">Ghent University, Campus Sterre — Building S3</p>
-            </div>
-          </motion.div>
-
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
