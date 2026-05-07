@@ -22,6 +22,9 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+import profNolanImg from "./assets/images/regenerated_image_1778148321924.jpg";
+import eleonoraRossiImg from "./assets/images/regenerated_image_1778131939252.jpg";
+
 // --- Constants ---
 
 const RESEARCH_AREAS = [
@@ -39,7 +42,7 @@ const TEAM_CATEGORIES = [
   {
     title: "Academic Staff",
     members: [
-      { name: "Prof. Steven P. Nolan", role: "Principal Investigator", image: "/src/assets/images/regenerated_image_1778148321924.jpg" }
+      { name: "Prof. Steven P. Nolan", role: "Principal Investigator", image: profNolanImg }
     ]
   },
   {
@@ -322,7 +325,7 @@ const NewsAndAgenda = () => {
       title: "Eleonora joined the team as a PhD student: welcome!",
       date: "04 May 2026",
       category: "Group News",
-      image: "/src/assets/images/regenerated_image_1778131939252.jpg"
+      image: eleonoraRossiImg
     },
     {
       title: "Leandros joins the group as postdoctoral researcher",
