@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-ugent-blue: #1E64B4;
+  --color-ugent-blue-dark: #15467E;
+  --color-ugent-blue-light: #f8fafc; /* slate-50 */
+  --color-ugent-yellow: #FFD200;
+  
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 selection:bg-ugent-blue/20;
+  }
+}
+
+@layer components {
+  .container-wide {
+    @apply max-w-7xl mx-auto px-6 md:px-12;
+  }
+  
+  .btn-primary {
+    @apply bg-ugent-blue text-white px-8 py-3 rounded-sm font-bold hover:bg-ugent-blue-dark transition-all shadow-md active:scale-[0.98] inline-block uppercase tracking-wide text-sm;
+  }
+  
+  .btn-secondary {
+    @apply bg-white/10 text-white border border-white/30 px-8 py-3 rounded-sm font-bold hover:bg-white/20 transition-all backdrop-blur-sm inline-block uppercase tracking-wide text-sm;
+  }
+  
+  .grid-accent {
+    @apply absolute inset-0 opacity-10 pointer-events-none;
+    background-image: linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 8.33333% 100%;
+  }
+}
